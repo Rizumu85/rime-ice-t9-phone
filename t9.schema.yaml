@@ -85,17 +85,28 @@ custom_phrase:
   enable_sentence: false
   initial_quality: 99
 
-# 九宫格 1 键上的符号序列
+# 九宫格标点符号
 punctuator:
   half_shape:
-    "1": [1, "@", ".", "/", ":", "_", "-", "#"]
+    # 1键：标点符号列表
+    "1": [".", ",", "?", "!", "'", '"', "-", "@", "/", ":"]
+    # *键：标点符号列表B（中文特有标点）
+    "*": ["。", "，", "？", "！", "、", "：", "；", "……", "——", "～"]
     "@": [1, "@", ！, ：, 、, ……, ～]
     "#": [0, "#", "$", "%", "^", "&", "*", "(", ")"]
 
-# 输入时按 1 可以分词
+# 按键绑定
 key_binder:
+  import_preset: default  # 继承默认配置
   bindings:
+    # 1键分词
     - { when: has_menu, accept: 1, send: apostrophe }
+    # 候选词翻页：上下键
+    - { when: has_menu, accept: Up, send: Page_Up }
+    - { when: has_menu, accept: Down, send: Page_Down }
+    # 候选词选择：左右键 -> 映射到Up/Down（selector组件使用Up/Down选择）
+    - { when: has_menu, accept: Left, send: Up }
+    - { when: has_menu, accept: Right, send: Down }
 
 speller:
   alphabet: zyxwvutsrqponmlkjihgfedcbaZYXWVUTSRQPONMLKJIHGFEDCBA9876543210=
