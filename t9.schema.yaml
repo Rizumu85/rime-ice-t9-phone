@@ -19,13 +19,13 @@ t9:
 
 schema:
   schema_id: t9
-  name: 中文九键
-  version: "3.0.0"
+  name: 拼音九键
+  version: "3.1.0"
   author:
     - Dvel
     - "[morse.hsiao](https://github.com/imfuxiao)"
   description: |
-    中文九键 for 仓输入法 & 元书输入法
+    拼音九键 for 仓输入法 & 元书输入法
   dependencies:
     - melt_eng # 英文输入，作为次翻译器挂载到拼音方案
 

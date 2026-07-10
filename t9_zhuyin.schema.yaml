@@ -4,7 +4,7 @@
 schema:
   schema_id: t9_zhuyin
   name: 注音九键
-  version: "1.0.0"
+  version: "1.1.0"
   author:
     - Rime Developers
     - Rizumu85
@@ -128,7 +128,6 @@ punctuator:
 key_binder:
   import_preset: default
   bindings:
-    - { when: composing, accept: numbersign, send: apostrophe }
     - { when: has_menu, accept: Up, send: Page_Up }
     - { when: has_menu, accept: Down, send: Page_Down }
     - { when: has_menu, accept: Left, send: Up }
