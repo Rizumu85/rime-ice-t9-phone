@@ -4,7 +4,7 @@
 schema:
   schema_id: t9_stroke
   name: 五笔画九键
-  version: "1.0.0"
+  version: "1.1.0"
   author:
     - Rime Developers
     - Rizumu85
@@ -54,7 +54,7 @@ speller:
     - xlit/hspnz/12345/
 
 translator:
-  dictionary: stroke
+  dictionary: t9_stroke
   prism: t9_stroke
   enable_completion: true
   enable_sentence: false
