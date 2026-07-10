@@ -1,0 +1,81 @@
+# Rime schema
+# encoding: utf-8
+
+schema:
+  schema_id: t9_stroke
+  name: 五笔画九键
+  version: "1.0.0"
+  author:
+    - Rime Developers
+    - Rizumu85
+  description: |
+    Numeric mobile Stroke input for a physical T9 keypad.
+    1 horizontal, 2 vertical, 3 left-falling, 4 dot/right-falling,
+    5 bend, and 6 up to two unknown strokes.
+
+switches:
+  - name: ascii_mode
+    reset: 0
+    states: [ 中, A ]
+  - name: simplification
+    reset: 1
+    states: [ 繁, 简 ]
+  - name: full_shape
+    states: [ 半角, 全角 ]
+
+engine:
+  processors:
+    - ascii_composer
+    - recognizer
+    - key_binder
+    - speller
+    - punctuator
+    - selector
+    - navigator
+    - express_editor
+  segmentors:
+    - ascii_segmentor
+    - matcher
+    - abc_segmentor
+    - punct_segmentor
+    - fallback_segmentor
+  translators:
+    - punct_translator
+    - table_translator
+    - lua_translator@*t9_stroke_wildcard
+  filters:
+    - simplifier@zh_simp
+    - uniquifier
+
+speller:
+  alphabet: "654321"
+  initials: "654321"
+  algebra:
+    - xlit/hspnz/12345/
+
+translator:
+  dictionary: stroke
+  prism: t9_stroke
+  enable_completion: true
+  enable_sentence: false
+  preedit_format:
+    - xlit/123456/一丨丿丶乛？/
+
+zh_simp:
+  option_name: simplification
+  opencc_config: t2s.json
+  tips: none
+
+punctuator:
+  import_preset: default
+
+key_binder:
+  import_preset: default
+  bindings:
+    - { when: has_menu, accept: Up, send: Page_Up }
+    - { when: has_menu, accept: Down, send: Page_Down }
+    - { when: has_menu, accept: Left, send: Up }
+    - { when: has_menu, accept: Right, send: Down }
+
+menu:
+  page_size: 24

@@ -3,7 +3,7 @@
 
 
 # 要比共享目录的同名文件的 config_version 大才可以生效
-config_version: '2026-02-06'
+config_version: '2026-07-09'
 
 
 # 方案列表
@@ -12,6 +12,8 @@ schema_list:
   # 除了 t9，它依赖于 rime_ice，用九宫格别删 rime_ice.schema.yaml
   - schema: rime_ice               # 雾凇拼音（全拼）
   - schema: t9                     # 中文九键（仓输入法 & 元书输入法）
+  - schema: t9_stroke              # 五笔画九键
+  - schema: t9_zhuyin              # 注音九键
 # - schema: double_pinyin          # 自然码双拼
 # - schema: double_pinyin_abc      # 智能 ABC 双拼
 # - schema: double_pinyin_mspy     # 微软双拼
