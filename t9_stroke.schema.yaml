@@ -3,7 +3,7 @@
 
 schema:
   schema_id: t9_stroke
-  name: 五笔画九键
+  name: 笔画九键
   version: "1.2.0"
   author:
     - Rime Developers
