@@ -57,6 +57,14 @@ def normalize_han(text: str) -> str | None:
     return normalized if is_complete_han(normalized) else None
 
 
+def entry_weight(text: str) -> int | None:
+    # Keep rare Han available, but let portable BMP characters fill mobile first pages;
+    # Android still performs the final device-font eligibility check at presentation time.
+    if text in LOW_PRIORITY_RADICAL_FORMS or ord(text) > 0xFFFF:
+        return 1
+    return None
+
+
 def parse_entries(source: str) -> list[Entry]:
     in_data = False
     seen: set[tuple[str, str]] = set()
@@ -83,7 +91,7 @@ def parse_entries(source: str) -> list[Entry]:
             Entry(
                 text=text,
                 code=code,
-                weight=1 if text in LOW_PRIORITY_RADICAL_FORMS else None,
+                weight=entry_weight(text),
             )
         )
     return entries

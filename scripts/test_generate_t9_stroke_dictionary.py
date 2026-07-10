@@ -23,7 +23,7 @@ A\th
         validate(entries)
 
         self.assertEqual(
-            [("一", "h", None), ("亻", "ps", 1), ("𠮷", "hsz", None)],
+            [("一", "h", None), ("亻", "ps", 1), ("𠮷", "hsz", 1)],
             [(entry.text, entry.code, entry.weight) for entry in entries],
         )
 
