@@ -134,4 +134,4 @@ key_binder:
     - { when: has_menu, accept: Right, send: Down }
 
 menu:
-  page_size: 24
+  page_size: 10

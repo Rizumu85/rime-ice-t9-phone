@@ -31,7 +31,8 @@ schema:
 
 engine:
   processors:
-    - t9_processor
+    # Physical T9 key semantics are owned by the Android IME. t9_processor is a
+    # Hamster/Yuanshu host component and prevents librime/Fcitx from loading this schema.
     - ascii_composer
     - recognizer
     - key_binder
