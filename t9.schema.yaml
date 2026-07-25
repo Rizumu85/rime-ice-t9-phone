@@ -119,9 +119,8 @@ speller:
   alphabet: zyxwvutsrqponmlkjihgfedcbaZYXWVUTSRQPONMLKJIHGFEDCBA9876543210=
   initials: zyxwvutsrqponmlkjihgfedcbaZYXWVUTSRQPONMLKJIHGFEDCBA9876543210=
   algebra:
-    # ### 超级简拼
-    - abbrev/^([a-z]).+$/$1/ # 超级简拼
-    - abbrev/^([zcs]h).+$/$1/ # 超级简拼中，zh ch sh 视为整体（ch'sh → 城市），而不是像这样分开（c'h's'h → 吃好睡好）。
+    # Super abbreviation is intentionally omitted: a T9 digit represents three
+    # or four initials, which makes librime explore an unbounded sentence graph.
     - derive/^([nl])ve$/$1ue/
     - derive/^([jqxy])u/$1v/
     - derive/un$/uen/

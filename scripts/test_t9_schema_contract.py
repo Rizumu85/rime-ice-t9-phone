@@ -12,6 +12,11 @@ class T9SchemaContractTest(unittest.TestCase):
 
         self.assertNotIn("- t9_processor", schema)
 
+    def test_pinyin_omits_super_abbreviation_from_numeric_search(self) -> None:
+        schema = (ROOT / "t9.schema.yaml").read_text(encoding="utf-8")
+
+        self.assertNotIn("- abbrev/", schema)
+
     def test_engine_pages_match_physical_shortcut_capacity(self) -> None:
         for relative_path in (
             "default.yaml",
