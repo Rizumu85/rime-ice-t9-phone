@@ -4,7 +4,7 @@
 schema:
   schema_id: t9_stroke
   name: 笔画九键
-  version: "1.3.0"
+  version: "1.3.1"
   author:
     - Rime Developers
     - Rizumu85
@@ -17,9 +17,6 @@ switches:
   - name: ascii_mode
     reset: 0
     states: [ 中, A ]
-  - name: prediction
-    reset: 0
-    states: [ 关闭联想, 开启联想 ]
   - name: simplification
     reset: 1
     states: [ 繁, 简 ]

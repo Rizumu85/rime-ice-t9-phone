@@ -20,7 +20,7 @@ t9:
 schema:
   schema_id: t9
   name: 拼音九键
-  version: "3.2.0"
+  version: "3.2.1"
   author:
     - Dvel
     - "[morse.hsiao](https://github.com/imfuxiao)"
@@ -59,6 +59,7 @@ engine:
     - lua_translator@*force_gc           # 暴力 GC
   filters:
     - simplifier@emoji # Emoji
+    - simplifier@prediction_simplify # predict.db is Traditional; normalize before output policy.
     - simplifier@traditionalize # 简繁切换
     - uniquifier # 去重
 
@@ -67,6 +68,12 @@ predictor:
   # Keep the engine pool bounded while leaving enough results for the app's measured paging.
   max_candidates: 80
   max_iterations: 0
+
+prediction_simplify:
+  option_name: prediction
+  opencc_config: t2s.json
+  tips: none
+  tags: [ prediction ]
 
 calculator:
   prefix: =

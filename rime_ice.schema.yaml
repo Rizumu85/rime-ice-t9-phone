@@ -24,9 +24,6 @@ schema:
 switches:
   - name: ascii_mode
     states: [ 中, Ａ ]
-  - name: prediction
-    states: [ 关闭联想, 开启联想 ]
-    reset: 0
   - name: ascii_punct  # 中英标点
     states: [ ¥, $ ]
   - name: traditionalization
@@ -226,7 +223,7 @@ traditionalize:
   option_name: traditionalization  # 对应 switches 中的 name
   opencc_config: s2t.json          # s2t.json | s2hk.json | s2tw.json | s2twp.json （Rime 内置配置，在程序目录可找到）
   tips: none                       # 转换提示: all 都显示 | char 仅单字显示 | none 不显示。
-  tags: [ abc, number, gregorian_to_lunar ]  # 限制在对应 tag，不对其他如反查的内容做简繁转换
+  tags: [ abc, number, gregorian_to_lunar, prediction ]  # 限制在对应 tag，不对其他如反查的内容做简繁转换
 
 
 # 标点符号

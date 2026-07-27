@@ -4,7 +4,7 @@
 schema:
   schema_id: t9_zhuyin
   name: 注音九键
-  version: "1.3.0"
+  version: "1.3.1"
   author:
     - Rime Developers
     - Rizumu85
@@ -16,9 +16,6 @@ switches:
   - name: ascii_mode
     reset: 0
     states: [ 中, A ]
-  - name: prediction
-    reset: 0
-    states: [ 关闭联想, 开启联想 ]
   - name: traditionalization
     states: [ 简, 繁 ]
   - name: emoji
@@ -50,6 +47,7 @@ engine:
     - script_translator
   filters:
     - simplifier@emoji
+    - simplifier@prediction_simplify
     - simplifier@traditionalize
     - uniquifier
 
@@ -57,6 +55,12 @@ predictor:
   db: predict.db
   max_candidates: 80
   max_iterations: 0
+
+prediction_simplify:
+  option_name: prediction
+  opencc_config: t2s.json
+  tips: none
+  tags: [ prediction ]
 
 speller:
   alphabet: "9876543210'"
