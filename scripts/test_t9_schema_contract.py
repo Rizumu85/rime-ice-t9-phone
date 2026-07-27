@@ -4,6 +4,11 @@ import unittest
 
 
 ROOT = Path(__file__).resolve().parents[1]
+PINYIN_ABBREVIATION_PREFIXES = (
+    "a", "b", "c", "d", "e", "f", "g", "h", "j", "k", "l", "m",
+    "n", "o", "p", "q", "r", "s", "t", "w", "x", "y", "z",
+    "zh", "ch", "sh",
+)
 
 
 class T9SchemaContractTest(unittest.TestCase):
@@ -26,16 +31,30 @@ class T9SchemaContractTest(unittest.TestCase):
         self.assertIn("- abbrev/^([a-z]).+$/$1/", abbreviation)
         self.assertIn("- derive/[wxyz]/9/", abbreviation)
 
-    def test_pinyin_abbreviation_tag_requires_a_confirmed_initial(self) -> None:
+    def test_pinyin_abbreviation_tag_covers_every_confirmed_prefix(self) -> None:
         schema = (ROOT / "t9.schema.yaml").read_text(encoding="utf-8")
         match = re.search(r'(?m)^\s+t9_abbreviation: "([^"]+)"$', schema)
 
         self.assertIsNotNone(match)
         pattern = re.compile(match.group(1))
-        for value in ("h'", "ni'h'", "h'64", "ni'h'64"):
-            with self.subTest(value=value):
-                self.assertIsNotNone(pattern.fullmatch(value))
-        for value in ("4", "44444444", "ni'", "hao'64"):
+        for prefix in PINYIN_ABBREVIATION_PREFIXES:
+            for value in (
+                f"{prefix}'",
+                f"ni'{prefix}'",
+                f"{prefix}'64",
+                f"ni'{prefix}'64",
+            ):
+                with self.subTest(prefix=prefix, value=value):
+                    self.assertIsNotNone(pattern.fullmatch(value))
+        for value in (
+            "4",
+            "44444444",
+            "i'",
+            "u'",
+            "v'",
+            "ni'",
+            "hao'64",
+        ):
             with self.subTest(value=value):
                 self.assertIsNone(pattern.fullmatch(value))
 

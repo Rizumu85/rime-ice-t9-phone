@@ -28,7 +28,7 @@ schema:
     拼音九键 for 仓输入法 & 元书输入法
   dependencies:
     - melt_eng # 英文输入，作为次翻译器挂载到拼音方案
-    - t9_abbreviation # Used only after the user confirms a one-letter reading.
+    - t9_abbreviation # Used only after the user confirms a Pinyin abbreviation.
 
 engine:
   processors:
@@ -86,9 +86,9 @@ recognizer:
   import_preset: default                # 从 default.yaml 继承通用的
   patterns:                             # 再增加方案专有的：
     calculator: "^=.+"                 # 响应 lua_translator@*calc_translator，计算器。前缀设定项 calculator/prefix
-    # A one-letter segment only exists after the user confirms a reading chip.
-    # Raw T9 digits stay on the fast full-pinyin translator.
-    t9_abbreviation: "^(?:[a-z2-9]+')*[a-z]'[a-z2-9']*$"
+    # Explicit abbreviation prefixes use a separate prism so raw T9 digits
+    # never pay for expansion. i/u/v cannot begin a Mandarin Pinyin syllable.
+    t9_abbreviation: "^(?:[a-z2-9]+')*(?:[zcs]h|[a-hj-tw-z])'[a-z2-9']*$"
 
 translator:
   prism: t9

@@ -8,7 +8,7 @@ schema:
   author:
     - Rizumu85
   description: |
-    Hidden prism for explicitly selected Pinyin initials.
+    Hidden prism for explicitly selected Pinyin abbreviation prefixes.
 
 engine:
   processors:
