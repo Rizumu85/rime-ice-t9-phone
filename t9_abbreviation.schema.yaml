@@ -1,0 +1,58 @@
+# Rime schema
+# encoding: utf-8
+
+schema:
+  schema_id: t9_abbreviation
+  name: T9 Abbreviation Index
+  version: "1.0"
+  author:
+    - Rizumu85
+  description: |
+    Hidden prism for explicitly selected Pinyin initials.
+
+engine:
+  processors:
+    - speller
+    - selector
+    - navigator
+    - express_editor
+  segmentors:
+    - abc_segmentor
+    - fallback_segmentor
+  translators:
+    - script_translator
+
+translator:
+  dictionary: rime_ice
+  prism: t9_abbreviation
+  enable_completion: false
+  enable_word_completion: false
+  enable_user_dict: false
+
+speller:
+  alphabet: zyxwvutsrqponmlkjihgfedcba9876543210
+  initials: zyxwvutsrqponmlkjihgfedcba9876543210
+  delimiter: " '"
+  algebra:
+    # This expensive graph is only queried for the recognizer tag created by an
+    # explicitly confirmed one-letter reading; ordinary numeric T9 never enters it.
+    - abbrev/^([a-z]).+$/$1/
+    - abbrev/^([zcs]h).+$/$1/
+    - derive/^([nl])ve$/$1ue/
+    - derive/^([jqxy])u/$1v/
+    - derive/un$/uen/
+    - derive/ui$/uei/
+    - derive/iu$/iou/
+    - derive/([aeiou])ng$/$1gn/
+    - derive/([dtngkhrzcs])o(u|ng)$/$1o/
+    - derive/ong$/on/
+    - derive/ao$/oa/
+    - derive/([iu])a(o|ng?)$/a$1$2/
+    - derive/[abc]/2/
+    - derive/[def]/3/
+    - derive/[hgi]/4/
+    - derive/[jkl]/5/
+    - derive/[omn]/6/
+    - derive/[pqrs]/7/
+    - derive/[tuv]/8/
+    - derive/[wxyz]/9/

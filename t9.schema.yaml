@@ -28,6 +28,7 @@ schema:
     拼音九键 for 仓输入法 & 元书输入法
   dependencies:
     - melt_eng # 英文输入，作为次翻译器挂载到拼音方案
+    - t9_abbreviation # Used only after the user confirms a one-letter reading.
 
 engine:
   processors:
@@ -52,6 +53,7 @@ engine:
     - predict_translator
     - punct_translator
     - script_translator
+    - script_translator@t9_abbreviation
     - lua_translator@*date_translator # 时间、日期、星期
     - table_translator@custom_phrase # 自定义短语 custom_phrase_t9.txt
     - table_translator@melt_eng     # 英文输入
@@ -84,6 +86,9 @@ recognizer:
   import_preset: default                # 从 default.yaml 继承通用的
   patterns:                             # 再增加方案专有的：
     calculator: "^=.+"                 # 响应 lua_translator@*calc_translator，计算器。前缀设定项 calculator/prefix
+    # A one-letter segment only exists after the user confirms a reading chip.
+    # Raw T9 digits stay on the fast full-pinyin translator.
+    t9_abbreviation: "^(?:[a-z2-9]+')*[a-z]'[a-z2-9']*$"
 
 translator:
   prism: t9
@@ -92,6 +97,21 @@ translator:
   comment_format:             # 保留拼读作为 comment，供第一行 preedit 显示
     - xform/^(.+)$/$1/
   # dictionary_exclude: [肏屄, 鸡巴]  # 如有屏蔽 NSFW 词汇需求 librime >= 1.14.0 等价于从 .dict.yaml 中删除对应词条，但不影响组句和用户词库。
+
+t9_abbreviation:
+  tag: t9_abbreviation
+  dictionary: rime_ice
+  prism: t9_abbreviation
+  enable_completion: false
+  enable_word_completion: false
+  enable_user_dict: false
+  initial_quality: -1
+  max_homophones: 1
+  max_sentences: 1
+  spelling_hints: 100
+  always_show_comments: true
+  comment_format:
+    - xform/^(.+)$/$1/
 
 # 自定义短语：custom_phrase_t9.txt
 # ⚠️ 编码要用数字
