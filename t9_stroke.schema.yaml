@@ -4,7 +4,7 @@
 schema:
   schema_id: t9_stroke
   name: 笔画九键
-  version: "1.2.0"
+  version: "1.3.0"
   author:
     - Rime Developers
     - Rizumu85
@@ -17,6 +17,9 @@ switches:
   - name: ascii_mode
     reset: 0
     states: [ 中, A ]
+  - name: prediction
+    reset: 0
+    states: [ 关闭联想, 开启联想 ]
   - name: simplification
     reset: 1
     states: [ 繁, 简 ]
@@ -27,6 +30,7 @@ engine:
   processors:
     - ascii_composer
     - recognizer
+    - predictor
     - key_binder
     - speller
     - punctuator
@@ -40,12 +44,18 @@ engine:
     - punct_segmentor
     - fallback_segmentor
   translators:
+    - predict_translator
     - punct_translator
     - table_translator
     - lua_translator@*t9_stroke_wildcard
   filters:
     - simplifier@zh_simp
     - uniquifier
+
+predictor:
+  db: predict.db
+  max_candidates: 80
+  max_iterations: 0
 
 speller:
   alphabet: "654321"

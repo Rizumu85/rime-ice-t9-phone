@@ -14,3 +14,9 @@ The Zhuyin phonetic conversion rules are adapted from
 LGPL-3.0. The phone-key grouping was cross-checked against the experimental
 [TT9 Bopomofo/Zhuyin fork](https://github.com/taitungsun/tt9-bopomofo-zhuyin),
 but no TT9 source code or dictionary data is copied into this repository.
+
+`predict.db` is the `data-1.0` prediction database published by
+[librime-predict](https://github.com/rime/librime-predict). It was built from
+Rime Essay and Octagram data and is redistributed under the librime-predict
+BSD-3-Clause license. The unmodified upstream binary is used so prediction
+quality and database compatibility remain owned by the Rime project.

@@ -24,6 +24,9 @@ schema:
 switches:
   - name: ascii_mode
     states: [ 中, Ａ ]
+  - name: prediction
+    states: [ 关闭联想, 开启联想 ]
+    reset: 0
   - name: ascii_punct  # 中英标点
     states: [ ¥, $ ]
   - name: traditionalization

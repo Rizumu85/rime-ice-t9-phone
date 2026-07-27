@@ -20,7 +20,7 @@ t9:
 schema:
   schema_id: t9
   name: 拼音九键
-  version: "3.1.0"
+  version: "3.2.0"
   author:
     - Dvel
     - "[morse.hsiao](https://github.com/imfuxiao)"
@@ -35,6 +35,7 @@ engine:
     # Hamster/Yuanshu host component and prevents librime/Fcitx from loading this schema.
     - ascii_composer
     - recognizer
+    - predictor
     - key_binder
     - speller
     - punctuator
@@ -48,6 +49,7 @@ engine:
     - punct_segmentor
     - fallback_segmentor
   translators:
+    - predict_translator
     - punct_translator
     - script_translator
     - lua_translator@*date_translator # 时间、日期、星期
@@ -59,6 +61,12 @@ engine:
     - simplifier@emoji # Emoji
     - simplifier@traditionalize # 简繁切换
     - uniquifier # 去重
+
+predictor:
+  db: predict.db
+  # Keep the engine pool bounded while leaving enough results for the app's measured paging.
+  max_candidates: 80
+  max_iterations: 0
 
 calculator:
   prefix: =
