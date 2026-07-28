@@ -20,7 +20,7 @@ t9:
 schema:
   schema_id: t9
   name: 拼音九键
-  version: "3.2.1"
+  version: "3.2.2"
   author:
     - Dvel
     - "[morse.hsiao](https://github.com/imfuxiao)"
