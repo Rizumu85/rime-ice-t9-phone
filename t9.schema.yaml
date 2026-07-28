@@ -29,6 +29,7 @@ schema:
   dependencies:
     - melt_eng # 英文输入，作为次翻译器挂载到拼音方案
     - t9_abbreviation # Used only after the user confirms a Pinyin abbreviation.
+    - t9_default_abbreviation # Deterministic fallback for unresolved raw digits.
 
 engine:
   processors:
@@ -45,6 +46,7 @@ engine:
     - express_editor
   segmentors:
     - ascii_segmentor
+    - lua_segmentor@*t9_default_abbreviation_segmentor
     - matcher
     - abc_segmentor
     - punct_segmentor
@@ -53,6 +55,7 @@ engine:
     - predict_translator
     - punct_translator
     - script_translator
+    - script_translator@t9_default_abbreviation
     - script_translator@t9_abbreviation
     - lua_translator@*date_translator # 时间、日期、星期
     - table_translator@custom_phrase # 自定义短语 custom_phrase_t9.txt
@@ -112,6 +115,23 @@ t9_abbreviation:
   always_show_comments: true
   comment_format:
     - xform/^(.+)$/$1/
+
+t9_default_abbreviation:
+  tag: t9_default_abbreviation
+  dictionary: rime_ice
+  prism: t9_default_abbreviation
+  enable_completion: false
+  enable_word_completion: false
+  enable_user_dict: false
+  initial_quality: -2
+  max_homophones: 1
+  max_sentences: 1
+  spelling_hints: 100
+  always_show_comments: true
+  comment_format:
+    # This path represents one default initial per key. Keeping full syllables
+    # would make the app preview letters the user never selected.
+    - xform/(^|[ '])([a-z])[a-z]*/$1$2/
 
 # 自定义短语：custom_phrase_t9.txt
 # ⚠️ 编码要用数字

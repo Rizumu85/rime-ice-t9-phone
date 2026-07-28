@@ -1,0 +1,47 @@
+# Rime schema
+# encoding: utf-8
+
+schema:
+  schema_id: t9_default_abbreviation
+  name: T9 Default Abbreviation Index
+  version: "1.0"
+  author:
+    - Rizumu85
+  description: |
+    Hidden fallback prism for unresolved raw Pinyin digits.
+
+engine:
+  processors:
+    - speller
+    - selector
+    - navigator
+    - express_editor
+  segmentors:
+    - abc_segmentor
+    - fallback_segmentor
+  translators:
+    - script_translator
+
+translator:
+  dictionary: rime_ice
+  prism: t9_default_abbreviation
+  enable_completion: false
+  enable_word_completion: false
+  enable_user_dict: false
+
+speller:
+  alphabet: "98765432"
+  initials: "98765432"
+  algebra:
+    # Raw digits already expose one stable default reading in the app. Index
+    # only that reading so fallback initials cannot recreate T9's 3-4 way graph.
+    - abbrev/^([a-z]).+$/$1/
+    - xform/^a$/2/
+    - xform/^e$/3/
+    - xform/^g$/4/
+    - xform/^j$/5/
+    - xform/^o$/6/
+    - xform/^p$/7/
+    - xform/^t$/8/
+    - xform/^w$/9/
+    - erase/^[a-z]+$/
