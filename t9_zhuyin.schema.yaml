@@ -126,10 +126,11 @@ translator:
     - xform/([iv])e(?=[' ]|$)/$1E/
     - 'xlit|bpmfdtnlgkhjqxZCSrzcsiuvaoeEAIOUMNKGR|ㄅㄆㄇㄈㄉㄊㄋㄌㄍㄎㄏㄐㄑㄒㄓㄔㄕㄖㄗㄘㄙㄧㄨㄩㄚㄛㄜㄝㄞㄟㄠㄡㄢㄣㄤㄥㄦ|'
 
+# The T9 app reads a partial selection's consumed digits from the candidate comment.
 emoji:
   option_name: emoji
   opencc_config: emoji.json
-  inherit_comment: false
+  inherit_comment: true
 
 traditionalize:
   option_name: traditionalization

@@ -17,6 +17,13 @@ t9:
   #        注意：请务必保证候选字 comment 有效且正确，否则可能导致预编辑文本显示异常。
   isDisplayOriginalPreedit: false
 
+# The T9 app reads a partial selection's consumed digits from the candidate comment. An emoji
+# must keep the reading of the word it replaces, or selecting it mid-sentence cannot be mirrored.
+emoji:
+  option_name: emoji
+  opencc_config: emoji.json
+  inherit_comment: true
+
 schema:
   schema_id: t9
   name: 拼音九键
